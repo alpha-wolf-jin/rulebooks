@@ -16,7 +16,7 @@
               - "Message 1 {{ event }}"
 
     - name: receive event for network update
-      condition: event.implement is defined
+      condition: event.payload.implement is defined
       action:
         print_event:
           pretty: true
