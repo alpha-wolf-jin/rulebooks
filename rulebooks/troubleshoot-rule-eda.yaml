@@ -8,15 +8,16 @@
         topic: quickstart-events
 
   rules:
+    - name: debug with multiple messages
+      condition: event.i >= 5
+      action:
+         debug:
+           msg:
+              - "Message 1 {{ event }}"
+
     - name: receive event for network update
-      condition: event is defined
+      condition: event.implement is defined
       action:
         print_event:
           pretty: true
 
-    - name: receive event for new routing
-      condition: event.implement == 'Execute TroubleShoot'
-      action:
-        run_job_template:
-          name: execute-task
-          organization: Default
