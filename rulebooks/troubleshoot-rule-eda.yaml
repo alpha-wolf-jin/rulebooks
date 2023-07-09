@@ -9,7 +9,7 @@
 
   rules:
     - name: debug with multiple messages
-      condition: event.i >= 5
+      condition: event.meta.headers is defined
       action:
          debug:
            msg:
