@@ -9,11 +9,10 @@
 
   rules:
     - name: receive event for network update
-      condition: event is defined
+      condition: event.implement is defined
       action:
         print_event:
           pretty: true
-          var_root: i
 
     - name: receive event for new routing
       condition: event.implement == 'Execute TroubleShoot'
