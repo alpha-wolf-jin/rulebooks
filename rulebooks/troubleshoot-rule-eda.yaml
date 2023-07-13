@@ -27,3 +27,10 @@
           job_args:
             extra_vars:
                 task_list: "{{ event.body }}"
+
+    - name: show event body
+      condition: event.body.implement == 'Execute TroubleShoot'
+      action:
+        debug:
+          msg: "Received: {{ event.body }}"
+
