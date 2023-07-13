@@ -5,19 +5,17 @@
     - ansible.eda.kafka:
         host: kafka.example.com
         port: 9092
-        topic: quickstart-events
+        topic: aap
 
   rules:
     - name: receive event for network update
-      condition: event.body.implement == 'Rule-Base'
+      condition: event.body.implement == 'RuleBase'
       action:
-        run_job_template:
-          name: recommendation
-          organization: Default
+        debug:
+          msg: "Received: {{ event.body }}"
 
     - name: receive event for new routing
       condition: event.body.implement == 'Execute TroubleShoot'
       action:
-        run_job_template:
-          name: execute-task
-          organization: Default
+        debug:
+          msg: "Received: {{ event.body }}"

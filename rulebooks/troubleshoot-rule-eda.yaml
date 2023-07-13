@@ -11,11 +11,13 @@
     - name: receive event for network update
       condition: event.body.implement == 'RuleBase'
       action:
-        debug:
-          msg: "Received: {{ event.body }}"
+        run_job_template:
+          name: recommendation
+          organization: Default
 
     - name: receive event for new routing
       condition: event.body.implement == 'Execute TroubleShoot'
       action:
-        debug:
-          msg: "Received: {{ event.body }}"
+        run_job_template:
+          name: execute-task
+          organization: Default
