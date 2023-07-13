@@ -14,6 +14,9 @@
         run_job_template:
           name: recommendation
           organization: Default
+          job_args:
+            extra_vars:
+                map_init: "{{ event.body.init | default(False) }}"
 
     - name: receive event for new routing
       condition: event.body.implement == 'Execute TroubleShoot'
@@ -21,3 +24,6 @@
         run_job_template:
           name: execute-task
           organization: Default
+          job_args:
+            extra_vars:
+                task_list: "{{ event.body }}"
