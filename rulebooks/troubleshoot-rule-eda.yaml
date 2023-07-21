@@ -3,7 +3,8 @@
   ## Define our source for events
   sources:   
     - ansible.eda.kafka:
-        host: kafka.example.com
+        #host: kafka.example.com
+        host: kafka.container.com
         port: 9092
         topic: aap
 
