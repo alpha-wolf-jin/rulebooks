@@ -4,7 +4,8 @@
   sources:   
     - ansible.eda.kafka:
         #host: kafka.example.com
-        host: kafka.container.com
+        #host: kafka.container.com
+        host: 192.168.122.51
         port: 9092
         topic: aap
 
