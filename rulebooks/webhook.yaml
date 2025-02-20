@@ -14,7 +14,8 @@
   ## Define the action we should take should the condition be met
       action:
         debug:
-          msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
+          msg: "You said, '{{ event }}'. Is it me you're looking for?"
+          #msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
      # action:
      #   run_playbook:
      #     name: say-what.yml
