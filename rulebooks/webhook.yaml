@@ -8,16 +8,6 @@
         port: 5000
   ## Define the conditions we are looking for
   rules:
-    - name: Say Hello
-      condition: event.payload.issue == "disk utilization"
-      #condition: event.payload.message == "Ansible is super cool"
-      action:
-        debug:
-          msg: "You said, '{{ event }}'. Is it me you're looking for?"
-          #msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
-    #action:
-    #  run_playbook:
-    #    name: say-what.yml
 
     - name: Disk Utiliation
       condition: event.payload.issue == "disk utilization"
@@ -29,3 +19,14 @@
               extra_vars:
                 host: "{{ event.payload.host }}"
                 fs: "{{ event.payload.fs }}"
+
+    - name: Say Hello
+      condition: event.payload.issue == "disk utilization"
+      #condition: event.payload.message == "Ansible is super cool"
+      action:
+        debug:
+          msg: "You said, '{{ event }}'. Is it me you're looking for?"
+          #msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
+    #action:
+    #  run_playbook:
+    #    name: say-what.yml
