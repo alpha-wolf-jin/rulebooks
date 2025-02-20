@@ -11,11 +11,21 @@
     - name: Say Hello
       condition: event.payload.issue == "disk utilization"
       #condition: event.payload.message == "Ansible is super cool"
-  ## Define the action we should take should the condition be met
       action:
         debug:
           msg: "You said, '{{ event }}'. Is it me you're looking for?"
           #msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
-     # action:
-     #   run_playbook:
-     #     name: say-what.yml
+    #action:
+    #  run_playbook:
+    #    name: say-what.yml
+
+    - name: Disk Utiliation
+      condition: event.payload.issue == "disk utilization"
+      actions:
+        - run_job_template:
+            name: "EDA-Notify-Disk-Utilization"
+            organization: "Default"
+            job_args:
+              extra_vars:
+                host: "{{ event.payload.host }}"
+                fs: "{{ event.payload.fs }}"
