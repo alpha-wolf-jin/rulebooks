@@ -21,7 +21,7 @@
                 fs: "{{ event.payload.fs }}"
 
     - name: Say Hello
-      condition: event.payload.issue == "disk utilization"
+      condition: event.payload.issue == "disk utilization debug"
       #condition: event.payload.message == "Ansible is super cool"
       action:
         debug:
