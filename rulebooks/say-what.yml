@@ -1,6 +1,7 @@
 ---
 - name: say thanks
-  hosts: localhost
+  hosts: "{{ host }}"
+  connection: local
   gather_facts: false
   tasks:
     - debug:
