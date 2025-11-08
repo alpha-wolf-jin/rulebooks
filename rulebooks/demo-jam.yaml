@@ -1,0 +1,18 @@
+- name: Read messages from a kafka topic and act on them
+  hosts: all
+  ## Define our source for events
+  sources:   
+    - ansible.eda.kafka:
+        #host: kafka.example.com
+        #host: kafka.container.com
+        host: 192.168.122.55
+        port: 9092
+        topic: connect-test
+
+  rules:
+    - name: show event body
+      condition: event.body is defined
+      action:
+        debug:
+          msg: "Received: {{ event }}"
+
