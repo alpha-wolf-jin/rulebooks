@@ -11,7 +11,7 @@
   ## Define the conditions we are looking for
   rules:
     - name: Security Alert
-      condition: "*type=SYSCALL*" == event.body.payload
+      condition: "*type=SYSCALL*" == event.payload
       actions:
         - run_job_template:
             name: "detect-bpfdoor"
