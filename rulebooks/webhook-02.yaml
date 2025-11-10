@@ -1,0 +1,22 @@
+---
+- name: Listen for events on a webhook
+  hosts: localhost
+  ## Define our source for events
+  sources:
+    - ansible.eda.kafka:
+        host: 192.168.122.55
+        port: 9092
+        topic: connect-test
+
+  ## Define the conditions we are looking for
+  rules:
+    - name: Security Alert
+      condition: event.payload == "type=SYSCALL"
+      actions:
+        - run_job_template:
+            name: "detect-bpfdoor"
+            organization: "Default"
+            job_args:
+              extra_vars:
+                event: "{{ event }}"
+

@@ -3,20 +3,35 @@
   hosts: localhost
   ## Define our source for events
   sources:
-    - ansible.eda.kafka:
-        host: 192.168.122.55
-        port: 9092
-        topic: connect-test
-
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
   ## Define the conditions we are looking for
   rules:
-    - name: Security Alert
-      condition: "type=SYSCALL" == event.payload
+    - name: Print complete event content
+      condition: event.payload is defined
+      action:
+        debug:
+          msg: "Received event: {{ event | to_nice_json }}"
+          
+    - name: Disk Utiliation
+      condition: event.payload.issue == "disk utilization"
       actions:
         - run_job_template:
-            name: "detect-bpfdoor"
+            name: "EDA-Notify-Disk-Utilization"
             organization: "Default"
             job_args:
               extra_vars:
-                event: "{{ event }}"
+                host: "{{ event.payload.host }}"
+                fs: "{{ event.payload.fs }}"
 
+    - name: Say Hello
+      condition: event.payload.issue == "disk utilization debug"
+      #condition: event.payload.message == "Ansible is super cool"
+      action:
+        debug:
+          msg: "You said, '{{ event }}'. Is it me you're looking for?"
+          #msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
+    #action:
+    #  run_playbook:
+    #    name: say-what.yml
