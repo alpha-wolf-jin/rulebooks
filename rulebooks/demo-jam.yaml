@@ -8,7 +8,7 @@
         topic: connect-test
 
   rules:
-    - name: show event body playload
+    - name: trigger playbook
       condition: 
         all:
           - event.payload contains "type=SYSCALL"
@@ -20,3 +20,13 @@
           job_args:
             extra_vars:
                 event: "{{ event }}"
+
+    - name: show event body playload
+      condition: 
+        all:
+          - event.body.payload contains "type=SYSCALL"
+          - event.body.payload contains "chmod"
+      action:
+        debug:
+          msg: "Received: {{ event.body }}"
+
