@@ -8,24 +8,24 @@
         topic: connect-test
 
   rules:
-    - name: trigger playbook
-      condition: 
-        all:
-          - event.payload contains "type=SYSCALL"
-          - event.payload contains "chmod"
-      action:
-        run_job_template:
-          name: "detect-bpfdoor"
-          organization: "Default"
-          job_args:
-            extra_vars:
-                event: "{{ event }}"
+    #- name: trigger playbook
+    #  condition: 
+    #    all:
+    #      - event.payload contains "type=SYSCALL"
+    #      - event.payload contains "chmod"
+    #  action:
+    #    run_job_template:
+    #      name: "detect-bpfdoor"
+    #      organization: "Default"
+    #      job_args:
+    #        extra_vars:
+    #            event: "{{ event }}"
 
     - name: show event body playload
       condition: 
-        all:
-          - "type=SYSCALL" in event.body.payload 
-          - "chmod" in event.body.payload 
+        all: 
+          - event.body.payload is search("type=SYSCALL", ignorecase=true)
+          - event.body.payload is search("chmod", ignorecase=true)
       action:
         debug:
           msg: "Received: {{ event.body }}"
