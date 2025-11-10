@@ -38,7 +38,9 @@
           organization: "Default"
           job_args:
             extra_vars:
+                host: "{{ event.body.payload | regex_search('node=([^ ]+)', '\\1') | first }}" 
                 event: "{{ event.body.payload }}"
+                 
 
       #  #all:
       #  #  - event.body.payload is search("chmod", ignorecase=true)
