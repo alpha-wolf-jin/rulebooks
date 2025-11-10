@@ -24,8 +24,8 @@
     - name: show event body playload
       condition: 
         all:
-          - event.body.payload contains "type=SYSCALL"
-          - event.body.payload contains "chmod"
+          - "type=SYSCALL" in event.body.payload 
+          - "chmod" in event.body.payload 
       action:
         debug:
           msg: "Received: {{ event.body }}"
