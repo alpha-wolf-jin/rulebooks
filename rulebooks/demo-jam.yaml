@@ -11,7 +11,8 @@
 
   rules:
     - name: show event body playload
-      condition: event.body is defined
+      #condition: event.body is defined
+      condition: event.body.payload is defined and "type=SYSCALL" in event.body.payload
       action:
         debug:
           msg: "Received: {{ event.body.payload }}"
