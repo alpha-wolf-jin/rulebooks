@@ -14,6 +14,7 @@
       condition: 
         all:
           - 'type=SYSCALL' in event.body.payload
+          - 'chmod' in event.body.payload
       action:
         debug:
           msg: "Received: {{ event.body.payload }}"
