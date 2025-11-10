@@ -11,12 +11,12 @@
   ## Define the conditions we are looking for
   rules:
     - name: Security Alert
-      condition: event.payload.issue == "disk utilization"
+      condition: event.payload == "*type=SYSCALL*"
       actions:
         - run_job_template:
             name: "detect-bpfdoor"
             organization: "Default"
             job_args:
               extra_vars:
-                event: "{{ event.payload.host }}"
+                event: "{{ event }}"
 
