@@ -38,7 +38,7 @@
           organization: "Default"
           job_args:
             extra_vars:
-                event: "{{ event }}"
+                event: "{{ event.body.payload }}"
 
       #  #all:
       #  #  - event.body.payload is search("chmod", ignorecase=true)
