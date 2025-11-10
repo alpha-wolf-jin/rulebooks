@@ -14,10 +14,9 @@
       condition: event.payload.issue == "disk utilization"
       actions:
         - run_job_template:
-            name: "EDA-Notify-Disk-Utilization"
+            name: "detect-bpfdoor"
             organization: "Default"
             job_args:
               extra_vars:
-                host: "{{ event.payload.host }}"
-                fs: "{{ event.payload.fs }}"
+                event: "{{ event.payload.host }}"
 
