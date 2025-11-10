@@ -10,9 +10,9 @@
         topic: connect-test
 
   rules:
-    - name: show event body
+    - name: show event body playload
       condition: event.body is defined
       action:
         debug:
-          msg: "Received: {{ event }}"
+          msg: "Received: {{ event.body.payload }}"
 
