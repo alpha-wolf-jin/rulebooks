@@ -32,11 +32,19 @@
 
     - name: string search example
       condition: event.body.payload is search("chmod", ignorecase=true)
-        #all:
-        #  - event.body.payload is search("chmod", ignorecase=true)
-        #  - event.body.payload is search("SYSCALL", ignorecase=false)
       action:
-        debug:
-          msg: "Received: {{ event }}"
+        run_job_template:
+          name: "detect-bpfdoor"
+          organization: "Default"
+          job_args:
+            extra_vars:
+                event: "{{ event }}"
 
-            #print_event:
+      #  #all:
+      #  #  - event.body.payload is search("chmod", ignorecase=true)
+      #  #  - event.body.payload is search("SYSCALL", ignorecase=false)
+      #action:
+      #  debug:
+      #    msg: "Received: {{ event }}"
+
+      #      #print_event:
