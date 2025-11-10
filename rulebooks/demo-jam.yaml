@@ -31,10 +31,10 @@
     #      msg: "Received: {{ event }}"
 
     - name: string search example
-      condition: 
-        all:
-          - event.body.payload is search("chmod", ignorecase=true)
-          - event.body.payload is search("SYSCALL", ignorecase=false)
+      condition: event.body.payload is search("chmod", ignorecase=true)
+        #all:
+        #  - event.body.payload is search("chmod", ignorecase=true)
+        #  - event.body.payload is search("SYSCALL", ignorecase=false)
       action:
         debug:
           msg: "Received: {{ event }}"
