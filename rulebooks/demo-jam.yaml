@@ -32,8 +32,9 @@
 
     - name: string search example
       condition: 
-        - event.body.payload is search("chmod", ignorecase=true)
-        - event.body.payload is search("SYSCALL", ignorecase=false)
+        all:
+          - event.body.payload is search("chmod", ignorecase=true)
+          - event.body.payload is search("SYSCALL", ignorecase=false)
       action:
         debug:
           msg: "Received: {{ event }}"
