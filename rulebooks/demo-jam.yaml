@@ -21,12 +21,16 @@
     #        extra_vars:
     #            event: "{{ event }}"
 
-    - name: show event body playload
-      condition: 
-        all: 
-          - event.payload is search("type=SYSCALL", ignorecase=true)
-          - event.payload is search("chmod", ignorecase=true)
-      action:
-        debug:
-          msg: "Received: {{ event }}"
+    #- name: show event body playload
+    #  condition: 
+    #    all: 
+    #      - event.payload is search("type=SYSCALL", ignorecase=true)
+    #      - event.payload is search("chmod", ignorecase=true)
+    #  action:
+    #    debug:
+    #      msg: "Received: {{ event }}"
 
+    - name: string search example
+      condition: event.url is search("chmod", ignorecase=true)
+      action:
+        print_event:
