@@ -9,11 +9,11 @@
 
   rules:
     - name: show event body playload
-      condition: 'type=SYSCALL' in event.body.payload
+      condition: 'type=SYSCALL' in event.payload
       action:
         run_job_template:
           name: "detect-bpfdoor"
           organization: "Default"
           job_args:
             extra_vars:
-                event: "{{ event.body }}"
+                event: "{{ event }}"
