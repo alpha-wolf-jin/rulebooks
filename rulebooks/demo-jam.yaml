@@ -38,7 +38,6 @@
           organization: "Default"
           job_args:
             extra_vars:
-                host: "{{ event.body.payload | regex_search('node=([^ ]+)', '\\1') | first }}" 
                 event: "{{ event.body.payload }}"
                  
 
