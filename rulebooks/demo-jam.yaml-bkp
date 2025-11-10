@@ -9,7 +9,10 @@
 
   rules:
     - name: show event body playload
-      condition: 'type=SYSCALL' in event.body.payload and 'chmod' in event.body.payload
+      condition: 
+        all:
+          - 'type=SYSCALL' in event.body.payload
+          - 'chmod' in event.body.payload
       action:
         run_job_template:
           name: "detect-bpfdoor"
