@@ -3,8 +3,6 @@
   ## Define our source for events
   sources:   
     - ansible.eda.kafka:
-        #host: kafka.example.com
-        #host: kafka.container.com
         host: 192.168.122.55
         port: 9092
         topic: connect-test
@@ -22,9 +20,3 @@
           job_args:
             extra_vars:
                 event: "{{ event.body }}"
-
-        #debug:
-        #  msg: "Received: {{ event.body.payload }}"
-
-      #condition: event.body.payload is defined and "type=SYSCALL" in event.body.payload
-      #condition: event.body.payload is defined 
