@@ -15,8 +15,8 @@
           - 'chmod' in event.body.payload
       action:
         run_job_template:
-          name: detect-bpfdoor
-          organization: Default
+          name: "detect-bpfdoor"
+          organization: "Default"
           job_args:
             extra_vars:
                 event: "{{ event.body }}"
