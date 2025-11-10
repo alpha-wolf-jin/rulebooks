@@ -16,8 +16,15 @@
           - 'type=SYSCALL' in event.body.payload
           - 'chmod' in event.body.payload
       action:
-        debug:
-          msg: "Received: {{ event.body.payload }}"
+        run_job_template:
+          name: detect-bpfdoor
+          organization: Default
+          job_args:
+            extra_vars:
+                event: "{{ event.body }}"
+
+        #debug:
+        #  msg: "Received: {{ event.body.payload }}"
 
       #condition: event.body.payload is defined and "type=SYSCALL" in event.body.payload
       #condition: event.body.payload is defined 
