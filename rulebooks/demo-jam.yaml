@@ -9,7 +9,7 @@
 
   rules:
     - name: show event body playload
-      condition: 'type=SYSCALL' in event.payload
+      condition: "*type=SYSCALL*" == event.body.payload
       action:
         run_job_template:
           name: "detect-bpfdoor"
