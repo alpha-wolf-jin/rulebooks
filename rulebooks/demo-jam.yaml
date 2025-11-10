@@ -31,6 +31,9 @@
     #      msg: "Received: {{ event }}"
 
     - name: string search example
-      condition: event.payload is search("chmod", ignorecase=true)
+      condition: event.body.payload is search("chmod", ignorecase=true)
       action:
-        print_event:
+        debug:
+          msg: "Received: {{ event }}"
+
+            #print_event:
