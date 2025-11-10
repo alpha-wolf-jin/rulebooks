@@ -11,8 +11,8 @@
     - name: show event body playload
       condition: 
         all:
-          - event.body.payload contains "type=SYSCALL"
-          - event.body.payload contains "chmod"
+          - event.payload contains "type=SYSCALL"
+          - event.payload contains "chmod"
       action:
         run_job_template:
           name: "detect-bpfdoor"
