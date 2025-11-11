@@ -22,8 +22,9 @@
       #  #all:
       #  #  - event.body.payload is search("chmod", ignorecase=true)
       #  #  - event.body.payload is search("SYSCALL", ignorecase=false)
+      #condition: event.body.payload is search("chmod", ignorecase=true)
     - name: show event
-      condition: event.body.payload is search("chmod", ignorecase=true)
+      condition: event.body.payload is is regex("exe=\\"/usr/bin/chmod\\"")
       action:
         debug:
           msg: "Received: {{ event }}"
