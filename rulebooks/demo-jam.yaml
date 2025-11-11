@@ -3,13 +3,13 @@
   ## Define our source for events
   sources:   
     - ansible.eda.kafka:
-        host: 192.168.122.55
+        host: kafka.example.com
         port: 9092
         topic: connect-test
 
   rules:
     - name: trigger playbook
-      condition: event.body.payload is search("chmod", ignorecase=true)
+      condition: event.body.payload is search("/usr/bin/chmod", ignorecase=true)
       action:
         run_job_template:
           name: "detect-bpfdoor"
@@ -23,10 +23,10 @@
       #  #  - event.body.payload is search("chmod", ignorecase=true)
       #  #  - event.body.payload is search("SYSCALL", ignorecase=false)
       #condition: event.body.payload is search("chmod", ignorecase=true)
-    - name: show event
-      condition: event.body.payload is search("/usr/bin/chmod", ignorecase=true)
-      action:
-        debug:
-          msg: "Received: {{ event }}"
+      #- name: show event
+      #  condition: event.body.payload is search("chmod", ignorecase=true)
+      #  action:
+      #    debug:
+      #      msg: "Received: {{ event }}"
 
-      #      #print_event:
+      #  #      #print_event:
