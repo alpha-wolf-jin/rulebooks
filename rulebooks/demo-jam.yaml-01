@@ -1,0 +1,32 @@
+- name: Read messages from a kafka topic and act on them
+  hosts: all
+  ## Define our source for events
+  sources:   
+    - ansible.eda.kafka:
+        host: kafka.example.com
+        port: 9092
+        topic: connect-test
+
+  rules:
+    - name: trigger playbook
+      condition: event.body.payload is search("/usr/bin/chmod", ignorecase=true)
+      action:
+        run_job_template:
+          name: "detect-bpfdoor"
+          organization: "Default"
+          job_args:
+            extra_vars:
+                event: "{{ event.body.payload }}"
+                 
+
+      #  #all:
+      #  #  - event.body.payload is search("chmod", ignorecase=true)
+      #  #  - event.body.payload is search("SYSCALL", ignorecase=false)
+      #condition: event.body.payload is search("chmod", ignorecase=true)
+      #- name: show event
+      #  condition: event.body.payload is search("chmod", ignorecase=true)
+      #  action:
+      #    debug:
+      #      msg: "Received: {{ event }}"
+
+      #  #      #print_event:

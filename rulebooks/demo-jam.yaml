@@ -1,22 +1,39 @@
-- name: Read messages from a kafka topic and act on them
-  hosts: all
+---
+- name: Listen for events on a webhook
+  hosts: localhost
   ## Define our source for events
-  sources:   
-    - ansible.eda.kafka:
-        host: kafka.example.com
-        port: 9092
-        topic: connect-test
-
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+  ## Define the conditions we are looking for
   rules:
-    - name: trigger playbook
-      condition: event.body.payload is search("/usr/bin/chmod", ignorecase=true)
+    - name: Print complete event content
+      condition: event.payload is defined
       action:
         run_job_template:
           name: "detect-bpfdoor"
           organization: "Default"
           job_args:
             extra_vars:
-                event: "{{ event.body.payload }}"
+                host: "{{ event.payload.node }}"
+                pid: "{{ event.payload.pid }}"
+                ppid: "{{ event.payload.ppid }}"
+                exe: "{{ event.payload.exe }}"
+                
+      #  action:
+      #    debug:
+      #      msg: "Received event: {{ event.payload }}"
+
+      #- name: trigger playbook
+      #  condition: event.body.payload is search("/usr/bin/chmod", ignorecase=true)
+      #  action:
+      #    run_job_template:
+      #      name: "detect-bpfdoor"
+      #      organization: "Default"
+      #      job_args:
+      #        extra_vars:
+      #            event: "{{ event.body.payload }}"
                  
 
       #  #all:

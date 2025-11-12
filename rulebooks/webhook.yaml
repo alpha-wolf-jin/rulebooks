@@ -12,7 +12,7 @@
       condition: event.payload is defined
       action:
         debug:
-          msg: "Received event: {{ event }}"
+          msg: "Received event: {{ event.payload }}"
           
     - name: Disk Utiliation
       condition: event.payload.issue == "disk utilization"
