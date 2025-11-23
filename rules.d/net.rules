@@ -1,0 +1,12 @@
+## Log any creation of AF_PACKET (sniffer) sockets
+#-a always,exit -F arch=b64 -S socket -F a0=17 -k packet-socket-create
+#-a always,exit -F arch=b32 -S socket -F a0=17 -k packet-socket-create
+
+### Audit network packet reception syscalls
+#-a always,exit -F arch=b64 -S recvfrom -k net-packet-recv
+#-a always,exit -F arch=b64 -S recvmsg -k net-packet-recv
+#-a always,exit -F arch=b64 -S recvmmsg -k net-packet-recv
+#
+#-a always,exit -F arch=b32 -S recvfrom -k net-packet-recv
+#-a always,exit -F arch=b32 -S recvmsg -k net-packet-recv
+#-a always,exit -F arch=b32 -S recvmmsg -k net-packet-recv

@@ -1,0 +1,3 @@
+## Monitor permission changes (chmod)
+-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F key=perm_change
+-a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F key=perm_change
