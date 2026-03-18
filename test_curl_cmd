@@ -1,0 +1,4 @@
+
+
+curl -k -H "Content-Type: application/json" -d '{"alert_level": "critical"}' -u "jin:redhat" -X POST "https://192.168.122.20/eda-event-streams/api/eda/v1/external_event_stream/2c769b47-7d3c-418e-95ae-437a7b3fd677/post/" 
+
