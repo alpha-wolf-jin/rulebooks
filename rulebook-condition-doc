@@ -1,0 +1,24 @@
+#https://docs.ansible.com/projects/rulebook/en/latest/conditions.html
+---
+- name: Listen for events on a webhook
+  hosts: localhost
+  ## Define our source for events
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+
+  rules:
+    - name: Peer IP event
+      # 'match' in Jinja2 automatically anchors to the beginning of the string
+      condition: event.payload.alertMessage is match('BGP status')
+      action:
+        run_job_template:
+          name: "PeerIP"
+          organization: "Default"
+          job_args:
+            extra_vars:
+              device: "{{ event.payload.device }}"
+              # Mapped from 'object' since 'peer_ip' is not a direct key in the payload
+              peer_object: "{{ event.payload.object }}" 
+              alert_message: "{{ event.payload.alertMessage }}"
